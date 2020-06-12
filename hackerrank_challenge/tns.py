@@ -62,51 +62,28 @@ def threeNumberSum(arr, target):
         # if target - hashtable[key] 
     
     # Naive
-	arr.sort()
+	arr.sort(reverse=True)
 	print(arr)
 
 	hash_table = {}
 
-	new_list = []
+	result = []
 
-	# for num in range(0, len(arr) - 2):
-	# 	print("Num", arr[num])
-	# 	for num2 in range(1, len(arr) - 1):
-	# 		print("Num 2", arr[num2])
-	# 		for num3 in range(2, len(arr)):
-	# 			# print("Num 3", arr[num3])
-	# 			print("Num Sum", arr[num] + arr[num2] + arr[num3])
-	# 			if num + num2 + num3 == target:
-	# 				list_one = [num, num2, num3]
-	# 				list_one.sort()
-	# 				print(list_one)
-	while arr[-1] >= target:
-		arr.pop()
-
-	if arr[-1] < target:
-		remainder = target - arr[-1]
-	
-	for num in arr:
-		hash_table[num] = remainder - num
+	for index in range(0, len(arr)-1):
+		hash_table[arr[index]] = target - arr[index]
+		print(hash_table)
 	
 	for key in hash_table:
-		if hash_table[key] in hash_table and hash_table[key] not in new_list:
-			new_list.append([key, hash_table[key], arr[-1]])
-	
-	half_new_list = []
+		for index in range(0, len(arr)-1):
+			difference = hash_table[key] - arr[index]
+			if difference in hash_table and hash_table[key] in arr:
+				new_result = [hash_table[key], arr[index], difference]
+				new_result.sort()
+				if new_result not in result:
+					result.append(new_result)
+					result.sort()
+					print("Result", result)
 
-	for item in range(0, len(new_list) / 2):
-		half_new_list.append(new_list[item])
-		print(new_list)
-	
-	# for item in new_list:
-	# 	item.sort()
-	# 	print(new_list)
-	
-	# for index in range(0, len(new_list) - 2):
-	# 	if new_list[index] == new_list[index + 1]:
-	# 		new_list.pop(index)
-	# 		print(new_list)
 
 array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 15]
 target = 30
